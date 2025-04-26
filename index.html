@@ -1,0 +1,164 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT-REGISTER</title>
+    <link rel="icon" type="registration-form-register- vector-icon-2" href="./registration-form-register-vector-icon-260nw-1019372971.webp">
+    <link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+
+   <h1>Student Registration System</h1>
+   
+   <div class="student-form">
+       <h2>Add New Student</h2>
+       <div class="form-group">
+           <label for="name">Student Name:</label>
+           <input type="text" id="name" placeholder="Enter student name">
+           <div class="error" id="name-error"></div>
+       </div>
+       
+       <div class="form-group">
+           <label for="class">Class:</label>
+           <select id="class">
+               <option value="">Select class</option>
+               <option value="JSS1">JSS1</option>
+               <option value="JSS2">JSS2</option>
+               <option value="JSS3">JSS3</option>
+               <option value="SS1">SS1</option>
+               <option value="SS2">SS2</option>
+               <option value="SS3">SS3</option>
+           </select>
+           <div class="error" id="class-error"></div>
+       </div>
+       
+       <div class="form-group">
+           <label for="score">Score (0-100):</label>
+           <input type="number" id="score" min="0" max="100" placeholder="Enter score">
+           <div class="error" id="score-error"></div>
+       </div>
+       
+       <button id="add-student">Add Student</button>
+       <button id="reset-form" style="background-color: #95a5a6;">Reset Form</button>
+   </div>
+
+   <div class="stats-container">
+       <div class="stat-card">
+           <div class="stat-label">Total Students</div>
+           <div class="stat-value" id="total-students">0</div>
+       </div>
+       <div class="stat-card">
+           <div class="stat-label">Average Score</div>
+           <div class="stat-value" id="average-score">0</div>
+       </div>
+       <div class="stat-card">
+           <div class="stat-label">Highest Score</div>
+           <div class="stat-value" id="highest-score">0</div>
+       </div>
+   </div>
+
+   <div class="tabs">
+       <div class="tab active" data-tab="all-students">All Students</div>
+       <div class="tab" data-tab="by-class">By Class</div>
+       <div class="tab" data-tab="by-grade">By Grade</div>
+   </div>
+
+   <div class="tab-content active" id="all-students">
+       <h2>All Students</h2>
+       <div class="search-container">
+           <input type="text" id="search-student" class="search-input" placeholder="Search by name...">
+           <select id="filter-class" class="filter-select">
+               <option value="">All Classes</option>
+               <option value="JSS1">JSS1</option>
+               <option value="JSS2">JSS2</option>
+               <option value="JSS3">JSS3</option>
+               <option value="SS1">SS1</option>
+               <option value="SS2">SS2</option>
+               <option value="SS3">SS3</option>
+           </select>
+           <select id="filter-grade" class="filter-select">
+               <option value="">All Grades</option>
+               <option value="A">Grade A</option>
+               <option value="B">Grade B</option>
+               <option value="C">Grade C</option>
+               <option value="D">Grade D</option>
+               <option value="F">Grade F</option>
+           </select>
+           <button id="clear-filters">Clear Filters</button>
+       </div>
+       <div id="students-list" class="container">
+           <p>No students added yet.</p>
+       </div>
+   </div>
+
+   <div class="tab-content" id="by-class">
+       <h2>Students by Class</h2>
+       <div id="class-container" class="container">
+           <p>No students added yet.</p>
+       </div>
+   </div>
+
+   <div class="tab-content" id="by-grade">
+       <h2>Students by Grade</h2>
+       <div id="grade-container" class="container">
+           <p>No students added yet.</p>
+       </div>
+   </div>
+
+   <!-- Edit Student Modal -->
+   <div id="edit-modal" class="modal">
+       <div class="modal-content">
+           <span class="close-modal">&times;</span>
+           <h2>Edit Student</h2>
+           <input type="hidden" id="edit-id">
+           <div class="form-group">
+               <label for="edit-name">Student Name:</label>
+               <input type="text" id="edit-name" placeholder="Enter student name">
+               <div class="error" id="edit-name-error"></div>
+           </div>
+           
+           <div class="form-group">
+               <label for="edit-class">Class:</label>
+               <select id="edit-class">
+                   <option value="">Select class</option>
+                   <option value="JSS1">JSS1</option>
+                   <option value="JSS2">JSS2</option>
+                   <option value="JSS3">JSS3</option>
+                   <option value="SS1">SS1</option>
+                   <option value="SS2">SS2</option>
+                   <option value="SS3">SS3</option>
+               </select>
+               <div class="error" id="edit-class-error"></div>
+           </div>
+           
+           <div class="form-group">
+               <label for="edit-score">Score (0-100):</label>
+               <input type="number" id="edit-score" min="0" max="100" placeholder="Enter score">
+               <div class="error" id="edit-score-error"></div>
+           </div>
+           
+           <button id="save-edit">Save Changes</button>
+           <button id="cancel-edit" style="background-color: #95a5a6;">Cancel</button>
+       </div>
+   </div>
+
+   <!-- Delete Confirmation Modal -->
+   <div id="delete-modal" class="modal">
+       <div class="modal-content">
+           <span class="close-modal">&times;</span>
+           <h2>Delete Student</h2>
+           <p>Are you sure you want to delete <span id="delete-student-name"></span>?</p>
+           <input type="hidden" id="delete-id">
+           <button id="confirm-delete" class="btn-delete">Delete</button>
+           <button id="cancel-delete" style="background-color: #95a5a6;">Cancel</button>
+       </div>
+   </div>
+
+   <footer>
+       <p>Student Registration System &copy; 2025 | <a href="https://github.com/nikkybel" class="footer-link" target="_blank">GitHub Repository</a></p>
+   </footer>
+   <script src="script.js"></script>
+    
+ </body>
+ </html>

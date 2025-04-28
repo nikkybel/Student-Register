@@ -5,6 +5,14 @@ body {
     margin: 0 auto;
     padding: 20px;
     color: #333;
+    animation: animatebell 5s linear infinite;
+    transition: 5s;
+}
+
+@keyframes animatebell {
+    100%{
+        filter: hue-rotate(360deg);
+    }
 }
 
 h1, h2, h3 {
